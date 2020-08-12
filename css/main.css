@@ -1,3 +1,37 @@
-body{
-    background-color: aqua;
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    text-align: center;
+}
+
+h1{
+    color: purple;
+}
+
+@font-face {
+    font-family: impact;
+    src: url(/font/Impact/impact.ttf);
+}
+
+canvas {
+    display: block;
+    margin: 0;
+    border: 1px solid black;
+}
+
+.canvas-container {
+    background-color: palegoldenrod;
+    margin: 0 auto;
+    width: 90vw;
+    height: 90vh;
+    border: 1px solid rgb(202, 67, 67);
+}
+
+.gallery{
+    width: 90vw;
+    height: 90vh;
+    background-color: plum;
 }

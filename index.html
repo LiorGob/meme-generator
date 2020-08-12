@@ -1,17 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/main.css">
     <title>MEME GENERATOR</title>
 </head>
-<body>
-    
 
+<body onload="onInit()">
+    <h1>MEME GENERATOR</h1>
 
+    <section class="meme">
+        <input type="text" name="text" placeholder="enter your meme" onkeyup="onAddMemeTxt(this.value)">
+        <!-- <input type="color" name="color" onchange="onSelectBgColor(this.value)"/> -->
+        <button onclick="clearCanvas()">Clear</button>
+    </section>
+    <div class="canvas-container">
+        <canvas id="myCanvas" height="500" width="500">
+            <!-- onclick="draw(event)" -->
+        </canvas>
+    </div>
 
-
+    <div class="gallery">
+        <!-- <img src="img/1.jpg" alt="">
+        <img src="img/2.jpg" alt=""> -->
+        </div>
 
 
 
@@ -19,4 +33,5 @@
     <script src="js/service-meme.js"></script>
     <script src="js/controller-meme.js"></script>
 </body>
+
 </html>
