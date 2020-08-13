@@ -9,27 +9,77 @@
 </head>
 
 <body onload="onInit()">
-    <h1>MEME GENERATOR</h1>
 
+    <header class="main-header container flex space-between align-center">
+        <!-- <div onclick=event.stopPropagation() class="menu container flex space-between align-center"> -->
+        <h1>memegen</h1>
+        <!-- <div class="main-logo"><img src="logo/LOGO.png"></div> -->
+        <ul class="main-nav flex align-center">
+            <li class="li self-center"><a class="li clean-list" href="#">Gallery</a></li>
+            <!-- <li><a class="li clean-list" href="#">About</a></li> -->
+        </ul>
+        </div>
+    </header>
+    <nav class="keyword-nav">
+        <input type="text" name="text" placeholder="Search Keyword 🔍">
+        <!-- onkeyup="To-do>functionIncreaseKeyword"> -->
+    </nav>
     <section class="meme">
-        <input type="text" name="text" placeholder="enter your meme" onkeyup="onAddMemeTxt(this.value)">
-        <!-- <input type="color" name="color" onchange="onSelectBgColor(this.value)"/> -->
-        <button onclick="clearCanvas()">Clear</button>
+        <div class="modal-editor">
+            <input type="text" name="text" placeholder="enter your meme" onkeyup="onAddMemeTxt(this.value)">
+            <!-- <input type="color" name="color" onchange="onSelectBgColor(this.value)"/> -->
+            <button onclick="clearCanvas()">Clear</button>
+            <button onclick="onIncreaseFont()">Increase Font</button>
+            <button onclick="onDecreaseFont()">Decrease Font</button>
+            <button onclick="onUpLine()">Up Line</button>
+            <button onclick="onDownLine()">Down Line</button>
+            <button onclick="onSwitchLines()">Switch Lines</button>
+            <div class="canvas-container">
+                <canvas id="myCanvas" height="500" width="500">
+                </canvas>
+            </div>
+        </div>
     </section>
-    <div class="canvas-container">
-        <canvas id="myCanvas" height="500" width="500">
-            <!-- onclick="draw(event)" -->
-        </canvas>
-    </div>
-
-    <div class="gallery">
-        <!-- <img src="img/1.jpg" alt="">
+    <section class="images-wrapper container">
+        <div class="gallery container">
+            <!-- <img src="img/1.jpg" alt="">
         <img src="img/2.jpg" alt=""> -->
         </div>
+    </section>
+    <fotter class="footer container">
+        <div class="first-footer">
+            <nav class="social-container container flex align-content center-items">
+                <img class="my-img" src="img/me/me.jpg">
+                <div class="my-info ">
+                    <h3>Lior Gobari</h3>
+                    <p>Hello!
+                         <!-- my name is Lior, i'm 29 years old. I live in Tel-Aviv.
+                        I have a BA in social work and shortly I will finish coding academy course for full stack
+                        developer.enjoy edit memes! -->
+                    </p>
+                    <ul class="list-inline clean-list container flex space-between space-around align-center">
+                        <li class="list-inline-item">
+                            <a href="#">
+                                <div class="fab fa-facebook-f"></div>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#">
+                                <div class="fab fa-twitter"></div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
 
-
-
-
+        <div class="second-footer container flex center culumn">
+            <h1 class="foter-logo self-center">memegen</h1>
+            <small class="small self-center">© all rights 2020 </small>
+            <!-- <div class="footer-logo"><img src="logo/LOGO.png"></div> -->
+        </div>
+    </fotter>
+    <script src="https://kit.fontawesome.com/522dede23e.js" crossorigin="anonymous"></script>
     <script src="js/service-meme.js"></script>
     <script src="js/controller-meme.js"></script>
 </body>

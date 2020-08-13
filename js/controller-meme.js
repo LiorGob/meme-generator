@@ -6,24 +6,20 @@ var gCtx;
 function onInit() {
     gCanvas = document.getElementById('myCanvas');
     gCtx = gCanvas.getContext('2d');
-    drawImg()
+    // drawImg()
     clearCanvas()
-    // renderImgs()
+    renderGalleryImgs()
 
 }
 // To do:
 // . Create a Canvas with a single image – the image shall be taken from
 // gMeme (managed by a memeService)
 
-// function drawImg() {
-//     const elImg = document.querySelector('img');
-//     gCtx.drawImage(elImg, 0, 0, gCanvas.width, gCanvas.height);
-// }
-
 function drawImg() {
-    // let currImg = gImgs;
+    // var currImg = getImgById(gImgs.id)
+    // var currImg = getImgs()
     const img = new Image();
-    img.src = gImgs[0].url;
+    img.src = getImgUrl();
     img.onload = () => {
         gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height);
         drawText(gMeme.line.txt, 225, 225)
@@ -38,7 +34,8 @@ function drawText(text, x, y) {
     gCtx.lineWidth = '2';
     gCtx.strokeStyle = 'black';
     gCtx.fillStyle = 'white';
-    gCtx.font = '40px Impact';
+    gCtx.font = `${gMeme.line.size}px Impact`
+    // '40px Impact';
     gCtx.textAlign = 'center';
     gCtx.fillText(text, x, y);
     gCtx.strokeText(text, x, y);
@@ -57,21 +54,46 @@ function onAddMemeTxt(text) {
 // gMeme and present it onto the Canvas. Note that to start with – locate
 // the Editor above the Image-Gallery.
 
-// function renderImgs() {
-//     var imgs = getImgs();
-//     console.log(imgs);
-//     var strHTMLs = imgs.map(function (img) {
-//         return `<img src="${img.imgUrl}" onclick="drawImg()">`
-//     });
-//     document.querySelector('.gallery').innerHTML = strHTMLs.join('');
-// }
+function renderGalleryImgs() {
+    var imgs = getImgs();
+    console.log(imgs);
+    var strHTMLs = imgs.map(function (img) {
+        return `<img onclick="onSelectImg(${img.id})" src="${img.url}" ${img.keywords}>`
+    });
+    document.querySelector('.gallery').innerHTML = strHTMLs.join('');
+}
 
 
-// i. Make sure you can access your project in gitPages
+function onSelectImg(id) {
+    // gMeme.selectedImgId = gImgs.id;
+    var img = getImgById(id);
+    drawImg(img)
+    document.querySelector('.modal-editor').style.display = 'block';
+    document.querySelector('.gallery').style.display = 'none';
+    document.querySelector('.keyword-nav').style.display = 'none';
+}
+
+function onIncreaseFont() {
+    increaseFontSize()
+    drawImg()
+    // drawText(gMeme.line.txt, 225, 225)
+}
+
+function onDecreaseFont() {
+    decreaseFontSize()
+    drawImg()
+}
 
 
+// to-do
+// function onUpLine(){}
+
+// function onDownLine(){}
+
+// function onSwitchLines(){}
 
 
 function clearCanvas() {
     gCtx.clearRect(0, 0, gCanvas.width, gCanvas.height)
 }
+

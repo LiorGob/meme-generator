@@ -2,18 +2,145 @@
     box-sizing: border-box;
 }
 
-body {
-    margin: 0;
-    text-align: center;
-}
-
-h1{
-    color: purple;
+@font-face {
+    font-family: Impact, Haettenschweiler;
+    src: url(/font/Impact/impact.ttf);
 }
 
 @font-face {
-    font-family: impact;
-    src: url(/font/Impact/impact.ttf);
+    font-family: Lato;
+    src: url(/font/Lato/Lato-Bold.ttf);
+}
+
+@font-face {
+    font-family: Eurofurence;
+    src: url(/font/Eurofurence/eurof55.ttf);
+}
+
+html {
+    font-family: Impact;
+    line-height: 1.5;
+    background-color: #ffffff;
+    font-size: 1rem;
+}
+
+body {
+    font-size: 1rem;
+    margin: 0;
+    position: relative;
+    text-align: center;
+    color: white;
+}
+
+h1 {
+    color: white;
+    font-size: 2.3rem;
+    font-family: Eurofurence;
+}
+
+h3 {
+    font-family: Lato;
+    color: #939292;
+    font-size: 2rem;
+}
+
+p {
+    font-family: Lato;
+    color: #939292;
+    font-size: 1.2rem;
+}
+
+a {
+    width: 60px;
+    height: 60px;
+    text-decoration: none;
+    color: white;
+    text-align: center;
+}
+
+li {
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-align: center;
+    font-family: Eurofurence;
+    height: 60px;
+    padding-top: 15px
+}
+
+li:hover {
+    box-shadow: inset 0 -6px 0 black;
+}
+
+button {
+    cursor: pointer;
+    border-radius: 20px;
+    outline: none;
+    font-family: E;
+    color: white;
+    font-size: 1rem;
+    background-color: #ff7f00;
+}
+
+button:hover {
+   opacity: 0.4;
+}
+
+input {
+    text-align: center;
+    width: 200px;
+    height: 50px;
+    color: #000000;
+    font-family: Lato;
+    font-size: 20px;
+    font-weight: 400;
+    border-radius: 12px;
+    background-color: #ffffff;
+    outline: none;
+    margin-bottom: 5px;
+}
+
+.container {
+    max-width: 980px;
+    margin: 0 auto;
+    /* margin-right: auto; */
+    padding: 0 1.2rem;
+}
+
+.main-header {
+    /* letter-spacing: 0.9px; */
+    width: 100%;
+    background-color: #ff7f00;
+    text-align: center;
+    margin-bottom: 3.75rem;
+    text-align: center;
+    /* height: 60px; */
+}
+
+/* .main-logo img {
+    height: 60px;
+    width: 200px;
+    margin-left: 50px;
+    text-align: center;
+    margin-top: 5px;
+}
+
+.footer-logo img{
+    height: 60px;
+    width: 200px;
+    padding-top: 20px;
+} */
+
+.main-nav li {
+    text-shadow: 0 1px 0 #1e1e1e;
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.main-header a:hover {
+    color: black;
 }
 
 canvas {
@@ -30,8 +157,155 @@ canvas {
     border: 1px solid rgb(202, 67, 67);
 }
 
-.gallery{
-    width: 90vw;
-    height: 90vh;
-    background-color: plum;
+.modal-editor {
+    width: 100%;
+    height: 100%;
+    display: none;
+    position: absolute;
 }
+
+.gallery {
+    height: 100%;
+    display: grid;
+    /* padding-top: 2px;
+    padding-top: 2px; */
+    gap: 15px;
+    grid-template-columns: repeat(auto-fit, minmax(25px, 1fr));
+    grid-auto-rows: 25px;
+    grid-auto-flow: dense;
+}
+
+.gallery img {
+    height: 100%;
+    width: 100%;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    display: flex;
+    grid-column: span 5;
+    grid-row: span 6;
+    padding-bottom: 35px;
+}
+
+.images-wrapper {
+    background-color: #e3e3e3;
+    height: 100%;
+}
+
+/* helpers */
+
+/* flex helpers */
+
+.flex {
+    display: flex;
+}
+
+.center {
+    justify-content: center;
+}
+
+.center-items {
+    align-items: center;
+}
+
+.self-center {
+    align-self: center;
+}
+
+.space-between {
+    justify-content: space-between;
+}
+
+.alien-center {
+    align-items: center;
+}
+
+.flex-start {
+    align-items: flex-start;
+}
+
+.space-around {
+    align-content: space-around;
+}
+
+.align-content {
+    align-content: center;
+}
+
+.margin-bottom {
+    margin-bottom: 60px;
+}
+
+.culumn {
+    flex-direction: column;
+}
+
+/* list helpers*/
+
+.clean-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+}
+
+.flex-start {
+    align-self: flex-start;
+}
+
+/* footer */
+
+.first-footer .social-container {
+    height: 500px;
+    text-align: center;
+    margin: 0 auto;
+    /* maybe add padding top */
+}
+
+.my-img {
+    width: 225px;
+    height: 225px;
+    border: 7px solid white;
+    border-bottom-style: ridge;
+    border-radius: 120px;
+    outline: none;
+}
+
+.list-inline .fab {
+    text-align: center;
+    /* display: inline-block; */
+    font-size: 100%;
+    width: 50px;
+    height: 50px;
+    background-color: #e5e5e5;
+    color: #ffffff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ff7f00;
+    border-radius: 10px;
+    outline: none;
+    text-decoration: none;
+}
+
+.fa-facebook-f:hover {
+    background-color: #4064ad;
+    font-size: 120%;
+}
+
+.fa-twitter:hover {
+    background-color: #1c9deb;
+    font-size: 150%;
+}
+
+.second-footer {
+    background-color: #ff7f00;
+    height: 150px;
+}
+
+small {
+    font-size: larger;
+}
+
+/* to-do */
+
+/* d. Implement a basic CSS for mobile (both gallery and Editor) */
