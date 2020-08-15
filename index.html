@@ -10,78 +10,125 @@
 
 <body onload="onInit()">
 
-    <header class="main-header container flex space-between align-center">
+    <header class="main-header container flex space-between">
         <!-- <div onclick=event.stopPropagation() class="menu container flex space-between align-center"> -->
         <h1>memegen</h1>
         <!-- <div class="main-logo"><img src="logo/LOGO.png"></div> -->
-        <ul class="main-nav flex align-center">
-            <li class="li self-center"><a class="li clean-list" href="#">Gallery</a></li>
-            <!-- <li><a class="li clean-list" href="#">About</a></li> -->
+        <ul class="main-nav flex">
+            <li><a onclick="onCloseEditor()" href="#">Gallery</a></li>
+            <li><a href="#"> About</a></li>
         </ul>
-        </div>
+        <!-- </div> -->
     </header>
-    <nav class="keyword-nav">
-        <input type="text" name="text" placeholder="Search Keyword 🔍">
-        <!-- onkeyup="To-do>functionIncreaseKeyword"> -->
-    </nav>
-    <section class="meme">
-        <div class="modal-editor">
-            <input type="text" name="text" placeholder="enter your meme" onkeyup="onAddMemeTxt(this.value)">
-            <!-- <input type="color" name="color" onchange="onSelectBgColor(this.value)"/> -->
-            <button onclick="clearCanvas()">Clear</button>
-            <button onclick="onIncreaseFont()">Increase Font</button>
-            <button onclick="onDecreaseFont()">Decrease Font</button>
-            <button onclick="onUpLine()">Up Line</button>
-            <button onclick="onDownLine()">Down Line</button>
-            <button onclick="onSwitchLines()">Switch Lines</button>
-            <div class="canvas-container">
-                <canvas id="myCanvas" height="500" width="500">
+    <!-- <nav class="main-nav">
+        <button class="nav-hamburger" onclick="onToggleMenu()">
+        </button> -->
+        <section class="meme container flex">
+            <div class="modal-editor">
+                <!-- <div class="txt-editors container flex"> -->
+                <!-- flex column align-items"> -->
+                <input type="text" name="text" class="placeholder" placeholder="enter your meme"
+                    onkeyup="onAddMemeTxt(this.value)">
+                <div class="first-row flex">
+                    <input class="edit-font delete-meme" type="image" src="icons/trash.png" onclick="onClearTxt()">
+                    <!-- onclick="clearCanvas()"> -->
+                    <input class="edit-font add-line" type="image" src="icons/add.png" onclick="onAddNewLine()">
+                    <input class="edit-font switch-line" type="image"
+                        src="icons/up-and-down-opposite-double-arrows-side-by-side.png" onclick="onSwitchLines()">
+                </div>
+                <div class="second-row flex">
+                    <input class="edit-font align-right-font" type="image" src="icons/align-to-right.png"
+                        onclick="onTxtAlignRight()">
+                    <input class="edit-font align-center-font" type="image" src="icons/center-text-alignment.png"
+                        onclick="onTxtAlignCenter()">
+                    <input class="edit-font align-left-font" type="image" src="icons/align-to-left.png"
+                        onclick="onTxtAlignLeft()">
+                    <input class="edit-font decrease-font" type="image" src="icons/decrease font - icon.png"
+                        onclick="onDecreaseFont()">
+                    <input class="edit-font increase-font" type="image" src="icons/increase font - icon.png"
+                        onclick="onIncreaseFont()">
+                </div>
+                <div class="third-row flex">
+                    <input class="edit-font change-color" type="image" src="icons/paint-board-and-brush.png"
+                        onclick="onChangeColor()">
+                    <input class="btn-color" type="color" id="color" onchange="onSetTxtColor(this.value)" hidden>
+                    <div class="fas fa-arrow-up" onclick="onUpLine()"></div>
+                    <div class="fas fa-arrow-down" onclick="onDownLine()"></div>
+                </div>
+                <!-- </div> -->
+
+                <div class="share-upload-download flex">
+                    <a href="#" class="btn padding-top" onclick="downloadImg(this)" download="my-img.jpg">Download as
+                        jpg</a>
+                    <form id="share" class="share" action="" method="POST" enctype="multipart/form-data"
+                        onsubmit="uploadImg(this, event)">
+                        <input name="img" id="imgData" type="hidden" />
+                        <button class="btn" type="submit">Publish</button>
+                </div>
+            </div>
+            <div class="canvas-container container">
+                <!-- container -->
+                <canvas id="myCanvas" height="550" width="540">
                 </canvas>
             </div>
-        </div>
-    </section>
-    <section class="images-wrapper container">
-        <div class="gallery container">
-            <!-- <img src="img/1.jpg" alt="">
-        <img src="img/2.jpg" alt=""> -->
-        </div>
-    </section>
-    <fotter class="footer container">
-        <div class="first-footer">
-            <nav class="social-container container flex align-content center-items">
-                <img class="my-img" src="img/me/me.jpg">
-                <div class="my-info ">
-                    <h3>Lior Gobari</h3>
-                    <p>Hello!
-                         <!-- my name is Lior, i'm 29 years old. I live in Tel-Aviv.
-                        I have a BA in social work and shortly I will finish coding academy course for full stack
-                        developer.enjoy edit memes! -->
-                    </p>
-                    <ul class="list-inline clean-list container flex space-between space-around align-center">
-                        <li class="list-inline-item">
-                            <a href="#">
-                                <div class="fab fa-facebook-f"></div>
-                            </a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a href="#">
-                                <div class="fab fa-twitter"></div>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </div>
+        </section>
 
-        <div class="second-footer container flex center culumn">
-            <h1 class="foter-logo self-center">memegen</h1>
-            <small class="small self-center">© all rights 2020 </small>
-            <!-- <div class="footer-logo"><img src="logo/LOGO.png"></div> -->
-        </div>
-    </fotter>
-    <script src="https://kit.fontawesome.com/522dede23e.js" crossorigin="anonymous"></script>
-    <script src="js/service-meme.js"></script>
-    <script src="js/controller-meme.js"></script>
+
+
+        <section class="images-wrapper container">
+            <nav class="keyword-nav flex container">
+                <input type="text" name="text" placeholder="Search Keyword 🔍">
+                <!-- onkeyup="To-do>functionIncreaseKeyword"> -->
+            </nav>
+
+            <div class="gallery container">
+                <!-- <img src="img/1.jpg" alt="">
+        <img src="img/2.jpg" alt=""> -->
+            </div>
+        </section>
+        <fotter class="footer">
+            <div class="first-footer container">
+                <nav class="social-container flex align-content center-items">
+                    <img class="my-img" src="img/me/me.jpg">
+                    <div class="my-info flex column">
+                        <h3>Lior Gobari</h3>
+                        <p>Hello!
+                            my name is Lior, i'm 29 years old. I live in Tel-Aviv.
+                            I have a BA in social work and shortly I will finish coding academy course for full stack
+                            developer. enjoy edit memes!
+                        </p>
+                        <ul class="list-inline clean-list flex space-around align-center">
+                            <li class="list-inline-item">
+                                <a href="#">
+                                    <div class="fab fa-linkedin-in"></div>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="https://www.facebook.com/lior.gobari">
+                                    <div class="fab fa-facebook-f"></div>
+                                </a>
+                            </li>
+
+                            <li class="list-inline-item">
+                                <a href="https://github.com/LiorGob">
+                                    <div class="fab fa-github"></div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+
+            <div class="second-footer container flex center column">
+                <h1 class="foter-logo self-center no-margin">memegen</h1>
+                <small class="small self-center">© all rights reserved 2020 </small>
+                <!-- <div class="footer-logo"><img src="logo/LOGO.png"></div> -->
+            </div>
+        </fotter>
+        <script src="https://kit.fontawesome.com/522dede23e.js" crossorigin="anonymous"></script>
+        <script src="js/storage.js"></script>
+        <script src="js/service-meme.js"></script>
+        <script src="js/controller-meme.js"></script>
 </body>
 
 </html>

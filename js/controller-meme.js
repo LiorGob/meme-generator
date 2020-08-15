@@ -1,58 +1,41 @@
 'use strict';
 
-var gCanvas;
-var gCtx;
+
 
 function onInit() {
     gCanvas = document.getElementById('myCanvas');
     gCtx = gCanvas.getContext('2d');
-    // drawImg()
     clearCanvas()
     renderGalleryImgs()
-
+   
 }
-// To do:
-// . Create a Canvas with a single image – the image shall be taken from
-// gMeme (managed by a memeService)
 
-function drawImg() {
-    // var currImg = getImgById(gImgs.id)
-    // var currImg = getImgs()
+function drawImg(currImg) {
     const img = new Image();
-    img.src = getImgUrl();
+    img.src = currImg.url;
     img.onload = () => {
         gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height);
-        drawText(gMeme.line.txt, 225, 225)
+        for (var i = 0; i < gMeme.lines.length; i++) {
+            var currline = gMeme.lines[i]
+            gCtx.font = `${currline.size}px Impact`;
+            gCtx.fillStyle = currline.color;
+            gCtx.lineWidth = 2;
+            gCtx.fillText(currline.txt, currline.positionX,currline.positionY);
+            gCtx.strokeText(currline.txt, currline.positionX, currline.positionY);
+        }
+    
     }
 }
 
-// f. Draw a text line on it with IMPACT font at the top of the image. The text
-// shall be taken from gMeme
 
-
-function drawText(text, x, y) {
-    gCtx.lineWidth = '2';
-    gCtx.strokeStyle = 'black';
-    gCtx.fillStyle = 'white';
-    gCtx.font = `${gMeme.line.size}px Impact`
-    // '40px Impact';
-    gCtx.textAlign = 'center';
-    gCtx.fillText(text, x, y);
-    gCtx.strokeText(text, x, y);
-}
-
-// g. Add text input to the HTML and dynamically take the text line value from
-// the input to gMeme and from it to the Canvas
 
 function onAddMemeTxt(text) {
-    addMemeTxt(text)
-    drawImg()
+    addMemeTxt(text);
+    // drawText('raz', 225, 225)
+    drawImg(gImgs[gMeme.selectedImgId]);
 
 }
 
-// h. Make a simple image-gallery with 2 images. Click an image to update
-// gMeme and present it onto the Canvas. Note that to start with – locate
-// the Editor above the Image-Gallery.
 
 function renderGalleryImgs() {
     var imgs = getImgs();
@@ -67,33 +50,159 @@ function renderGalleryImgs() {
 function onSelectImg(id) {
     // gMeme.selectedImgId = gImgs.id;
     var img = getImgById(id);
+    creatMeme(id) //creates a new meme model
     drawImg(img)
-    document.querySelector('.modal-editor').style.display = 'block';
+    document.querySelector('.modal-editor').style.display = 'grid';
+    document.querySelector('.canvas-container').style.display = 'grid';
     document.querySelector('.gallery').style.display = 'none';
     document.querySelector('.keyword-nav').style.display = 'none';
+    document.querySelector('.first-footer').style.display = 'none';
+    document.querySelector('.btn').style.display = 'block';
+
+
 }
 
 function onIncreaseFont() {
     increaseFontSize()
-    drawImg()
+    drawImg(gImgs[gMeme.selectedImgId])
     // drawText(gMeme.line.txt, 225, 225)
 }
 
 function onDecreaseFont() {
     decreaseFontSize()
-    drawImg()
+    drawImg(gImgs[gMeme.selectedImgId])
+}
+
+function onCloseEditor() {
+    document.querySelector('.modal-editor').style.display = 'none';
+    document.querySelector('.canvas-container').style.display = 'none';
+    document.querySelector('.keyword-nav').style.display = 'grid'
+    document.querySelector('.gallery').style.display = 'grid';
+    document.querySelector('.first-footer').style.display = 'grid';
+
+}
+
+function onUpLine() {
+    setLineUp();
+    drawImg(gImgs[gMeme.selectedImgId]);
+
+}
+
+function onDownLine() {
+    setLineDown();
+    drawImg(gImgs[gMeme.selectedImgId]);
+}
+
+function onAddNewLine() {
+    addNewLine()
+    // saveAndRestoreText(gMeme.line.txt, 90,300)
+    // drawText(gMeme.lines[gMeme.selectedLineIdx].txt, 90, 300)
+    // gCtx.save();
+    drawImg(gImgs[gMeme.selectedImgId])
 }
 
 
-// to-do
-// function onUpLine(){}
+function onSwitchLines() {
+    switchLines();
+    drawImg(gImgs[gMeme.selectedImgId]);
 
-// function onDownLine(){}
 
-// function onSwitchLines(){}
 
+    // let newLine = gMeme.selectedLineIdx;
+    // if (newLine === gMeme.line.length - 1 && newLine > 0) {
+    //     newLine = 0
+    // }
+    // else {
+    //     newLine++
+    // }
+
+}
+
+function onTxtAlignRight() {
+    setTextRight()
+    drawImg(gImgs[gMeme.selectedImgId])
+}
+function onTxtAlignCenter() {
+    setTextCenter()
+    drawImg(gImgs[gMeme.selectedImgId])
+}
+
+function onTxtAlignLeft() {
+    setTextLeft();
+    drawImg(gImgs[gMeme.selectedImgId]);
+}
 
 function clearCanvas() {
     gCtx.clearRect(0, 0, gCanvas.width, gCanvas.height)
+    // You may clear part of the canvas
+    // gCtx.clearRect(0, 0, gCanvas.width / 2, gCanvas.height / 2);
+}
+
+function onChangeColor() {
+    document.querySelector(".btn-color").focus();
+    document.querySelector(".btn-color").value = "#FFCC00";
+    document.querySelector(".btn-color").click();
+}
+
+function onSetTxtColor(color) {
+    seColorTxt(color);
+    drawImg(gImgs[gMeme.selectedImgId]);
+}
+
+function onClearTxt() {
+    document.querySelector('.placeholder').value = '';
+    clearTxt();
+    drawImg(gImgs[gMeme.selectedImgId]);
+}
+
+
+function resizCanvas() {
+    const elContainer = document.querySelector('.canvas-container');
+    gCanvas.width = elContainer.offsetWidth;
+    gCanvas.height = elContainer.offsetHeight;
+    drawImg(gImgs[gMeme.selectedImgId])
+}
+
+// window.addEventListener('resize', function () {
+//     resizCanvas();
+// })
+
+
+// upload & dowmload functions:
+
+function downloadImg(elLink) {
+    var imgContent = gCanvas.toDataURL(`${gImgs[gMeme.selectedImgId]}`);
+    elLink.href = imgContent
+}
+
+
+function uploadImg(elForm, ev) {
+    ev.preventDefault();
+    document.getElementById('share').value = gCanvas.toDataURL(`${gImgs[gMeme.selectedImgId].url}`);
+
+    function onSuccess(uploadedImgUrl) {
+        uploadedImgUrl = encodeURIComponent(uploadedImgUrl)
+        document.querySelector('.share-upload-download').innerHTML = `
+        <a class="btn" href="https://www.facebook.com/sharer/sharer.php?u=${uploadedImgUrl}&t=${uploadedImgUrl}" title="Share on Facebook" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=${uploadedImgUrl}&t=${uploadedImgUrl}'); return false;">
+           Share   
+        </a>`
+    }
+
+    doUploadImg(elForm, onSuccess);
+}
+
+function doUploadImg(elForm, onSuccess) {
+    var formData = new FormData(elForm);
+    fetch('http://ca-upload.com/here/upload.php', {
+        method: 'POST',
+        body: formData
+    })
+        .then(function (res) {
+            return res.text()
+        })
+        .then(onSuccess)
+        .catch(function (err) {
+            console.error(err)
+        })
 }
 
