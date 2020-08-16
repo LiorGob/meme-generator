@@ -18,15 +18,11 @@
             <li><a onclick="onCloseEditor()" href="#">Gallery</a></li>
             <li><a href="#"> About</a></li>
         </ul>
-        <!-- </div> -->
+        <!-- <div class="mobile-menu-close" onclick="onToggleMenu()" hidden>x</div>
+        <div class="mobile-menu-btn" onclick="onToggleMenu()">☰</div> -->
     </header>
-    <!-- <nav class="main-nav">
-        <button class="nav-hamburger" onclick="onToggleMenu()">
-        </button> -->
         <section class="meme container flex">
             <div class="modal-editor">
-                <!-- <div class="txt-editors container flex"> -->
-                <!-- flex column align-items"> -->
                 <input type="text" name="text" class="placeholder" placeholder="enter your meme"
                     onkeyup="onAddMemeTxt(this.value)">
                 <div class="first-row flex">
@@ -55,15 +51,15 @@
                     <div class="fas fa-arrow-up" onclick="onUpLine()"></div>
                     <div class="fas fa-arrow-down" onclick="onDownLine()"></div>
                 </div>
-                <!-- </div> -->
 
-                <div class="share-upload-download flex">
-                    <a href="#" class="btn padding-top" onclick="downloadImg(this)" download="my-img.jpg">Download as
-                        jpg</a>
+                <div class="share-upload-download flex space-between justify-around">
+                   <button><a href="#" class="btn" onclick="downloadImg(this)" download="my-img.jpg">Download as
+                        jpg</a></button>
                     <form id="share" class="share" action="" method="POST" enctype="multipart/form-data"
                         onsubmit="uploadImg(this, event)">
-                        <input name="img" id="imgData" type="hidden" />
+                        <input name="img" id="imgData" type="hidden">
                         <button class="btn" type="submit">Publish</button>
+                       </form>
                 </div>
             </div>
             <div class="canvas-container container">
@@ -72,11 +68,8 @@
                 </canvas>
             </div>
         </section>
-
-
-
         <section class="images-wrapper container">
-            <nav class="keyword-nav flex container">
+            <nav class="keyword-nav padding-bottom flex container">
                 <input type="text" name="text" placeholder="Search Keyword 🔍">
                 <!-- onkeyup="To-do>functionIncreaseKeyword"> -->
             </nav>
@@ -86,7 +79,7 @@
         <img src="img/2.jpg" alt=""> -->
             </div>
         </section>
-        <fotter class="footer">
+        <footer class="footer">
             <div class="first-footer container">
                 <nav class="social-container flex align-content center-items">
                     <img class="my-img" src="img/me/me.jpg">
@@ -124,7 +117,7 @@
                 <small class="small self-center">© all rights reserved 2020 </small>
                 <!-- <div class="footer-logo"><img src="logo/LOGO.png"></div> -->
             </div>
-        </fotter>
+        </footer>
         <script src="https://kit.fontawesome.com/522dede23e.js" crossorigin="anonymous"></script>
         <script src="js/storage.js"></script>
         <script src="js/service-meme.js"></script>
